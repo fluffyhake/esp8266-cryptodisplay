@@ -303,55 +303,32 @@ void loop() {
       }
       
 // JSON STUFF :(
+      
+      
 
-      JSONVar myObject = JSON.parse(payload);
-      
-      // JSON.typeof(jsonVar) can be used to get the type of the var
-      if (JSON.typeof(myObject) == "undefined") {
-        Serial.println("Parsing input failed!");
-        return;
-      }
-      
-//      Serial.print("JSON object = ");
-//      Serial.println(myObject);
-      
-      // myObject.keys() can be used to get an array of all the keys in the object
-      JSONVar keys = myObject.keys();
-      
-//      for (int i = 0; i < keys.length(); i++) {
-//        JSONVar value = myObject[keys[i]];
-//        Serial.print(keys[i]);
-//        Serial.print(" = ");
-//        Serial.println(value);
-//        payloadArr[i] = double(value);
-//      }
-      
-      JSONVar value = myObject[keys[1]];
-      String myvalue = JSON.stringify(value);
-      // makes the value from key 1 into a string called myvalue
-      //it now looks like this "3326.55900000"
-      
-//      Serial.println(value);
-//      Serial.println(myvalue);
-
-      myvalue.remove(0,1);
-// now looks like this      3329.91100000"
-      myvalue.remove(10,4);
-// now looks like this 3324.39100
-      Serial.println(myvalue);
+      Serial.println(parsejson(payload));
 
       display.clearDisplay();
       testdrawbitmap_ether();
       display.setCursor(1,0);
       display.setTextSize(2);             // Draw 2X-scale text
       display.setTextColor(SSD1306_WHITE);
-      display.print(myvalue);
+      display.print("             ");
+      display.setCursor(1,0);
+      display.print(parsejson(payload));
     
       display.display();
-      delay(200);
+      delay(2000);
 
       display.clearDisplay();
       testdrawbitmap_doge();
+      display.setCursor(1,0);
+      display.setTextSize(2);             // Draw 2X-scale text
+      display.setTextColor(SSD1306_WHITE);
+      display.print("             ");
+      display.setCursor(1,0);
+      display.print(parsejson(payloaddoge));
+      display.display();
       delay(2000);
 
   }else{
@@ -412,7 +389,10 @@ String parsejson(String payload){
       String myvalue = JSON.stringify(value);
       // makes the value from key 1 into a string called myvalue
       //it now looks like this "3326.55900000"
-
+      myvalue.remove(0,1);
+      // now looks like this      3329.91100000"
+      myvalue.remove(10,4);
+      // now looks like this 3324.39100
       return myvalue;
 
 }
