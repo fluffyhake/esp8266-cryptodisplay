@@ -25,7 +25,7 @@ float payloadArr[3];
 WiFiClientSecure wifiClient;
 
 const char* ssid = "IOS_NET";
-const char* password = "InternetOfShits22";
+const char* password = "xxxx";
 #define LOGO_HEIGHT   64
 #define LOGO_WIDTH    128
 
